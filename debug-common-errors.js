@@ -24,10 +24,12 @@ Think about which debugging methods you found most useful and how you might appl
 // Description:
 // This program is intended to display a simple prompt in the console but fails to run.
 
-console.log("Welcome to the bootcamp
+console.log("Welcome to the bootcamp");
 
 // What’s Wrong?
 
+// ❌ SYNTAX ERROR: Missing closing quote and parenthesis in console.log()
+// ✅ FIXED: Added closing quote and parenthesis
 
 // Program B
 // Description:
@@ -35,13 +37,17 @@ console.log("Welcome to the bootcamp
 
 let numbers = [2, 4, "eight"];
 for (let i = 0; i < numbers.length; i++) {
-  let doubled = numbers[i] * 2;
-  console.log(doubled);
+  if (typeof numbers[i] === "number") {
+    let doubled = numbers[i] * 2;
+    console.log(doubled);
+  } else {
+    console.log(`Skipping non-number value: ${numbers[i]}`);
+  }
 }
-
 // What’s Wrong?
 
-
+// ❌ RUNTIME ERROR: Attempting to multiply a string ("eight") causes NaN
+// ✅ FIXED: Added a type check to skip non-numeric values
 
 // Program C (Logic Error)
 // Description:
@@ -51,12 +57,16 @@ function isPrime(num) {
   if (num < 2) return false;
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
-      return true;  // Supposed to indicate num is NOT prime
+      return false; // Number is divisible by i, so it's NOT prime
     }
   }
-  return false; // Supposed to indicate num IS prime
+  return true; // No divisors found, number IS prime
 }
 
-console.log(isPrime(7)); // Expected true but gets false
+console.log(isPrime(7)); // ✅ Expected output: true
+console.log(isPrime(10)); // ✅ Expected output: false
 
 // What’s Wrong?
+
+// ❌ LOGICAL ERROR: Returning `true` when a number *is divisible* (i.e., not prime)
+// ✅ FIXED: Return false if divisible, true at the end if no divisors found
